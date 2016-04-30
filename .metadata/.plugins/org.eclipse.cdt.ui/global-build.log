@@ -1,5 +1,0 @@
-16:16:46 **** Rebuild of configuration Debug for project ListaCircularDinamica ****
-Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ListaCircularDinamica.o" "..\\src\\ListaCircularDinamica.c" 
-gcc -o ListaCircularDinamica.exe "src\\ListaCircularDinamica.o" 
-Info: Nothing to build for ListaCircularDinamica
