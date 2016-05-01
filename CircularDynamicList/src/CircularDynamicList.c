@@ -2,9 +2,7 @@
  ============================================================================
  Name        : CircularDynamicList.c
  Author      : Natasha Kaweski
- Version     : 2.0
- Copyright   :
- Description : Hello World in C, Ansi-style
+ Version     : 1.2
  ============================================================================
  */
 
@@ -59,11 +57,12 @@ void printList(DList* list) {
 	DList* aux = list;
 
 	// If the list is empty, it doesn't enter the loop
-	if(aux)
-	do {
-		printf( "List: %c\n", aux->data );
-		aux = aux->next;
-	} while ( aux != list ); // Exit the loop
+	if(aux) {
+		do {
+			printf( "List: %c\n", aux->data );
+			aux = aux->next;
+		} while ( aux != list ); // Exit the loop
+	}
 }
 
 /*
@@ -90,12 +89,12 @@ int emptyList(DList* list){
 DList* searchChar(DList* list, char ch) {
 	DList* aux = list;
 
-	if(aux)
-	do {
-		if ( aux->data == ch ) return aux;
-		aux = aux->next;
-	} while ( aux != list );  // Exit the loop
-
+	if(aux) {
+		do {
+			if ( aux->data == ch ) return aux;
+			aux = aux->next;
+		} while ( aux != list );  // Exit the loop
+	}
 	return NULL; // If is doesn't find the char, it returns nothing
 }
 
@@ -103,25 +102,19 @@ DList* searchChar(DList* list, char ch) {
  * Free space in memory and clean the list.
  */
 DList* freeList(DList* list) {
-	DList* aux = list;
 
 	if ( !emptyList(list) ) {
-
-		while (aux->next != NULL) {
-			DList* aux2 = aux;
-			aux = aux->next;
-			free(aux2);
-		}
-
-		// Free the last pointer.
+		DList* aux = list;
+		list = list->next;
 		free(aux);
+		if ( !emptyList(list) )
+			return freeList(list);
 	}
 	// Return the memory address list.
 	return list;
 }
 
-int main(void)
-{
+int main(void) {
 
 	DList *mainList;
 	mainList = startList(); // Starts the list with NULL value
@@ -129,18 +122,15 @@ int main(void)
 	mainList = insertChar(mainList, 'C');
 	mainList = insertChar(mainList, 'H');
 	mainList = insertChar(mainList, 'E');
-	mainList = insertChar(mainList, 'R');
-	mainList = insertChar(mainList, 'R');
-	mainList = insertChar(mainList, 'Y');
+	//mainList = insertChar(mainList, 'R');
+	//mainList = insertChar(mainList, 'R');
+	//mainList = insertChar(mainList, 'Y');
 
-	printList(mainList);
-
-	printf("\n\nSearch result: %p\n\n", searchChar(mainList, 'A'));
+	//printList(mainList);
+	// printf("\n\nSearch result: %p\n\n", searchChar(mainList, 'A'));
 
 	mainList = freeList(mainList);
-
 	printList(mainList);
 
 	return EXIT_SUCCESS;
-
 }
