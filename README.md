@@ -12,6 +12,7 @@ These are my projects in C language made for FUMEC University in Data Structures
 * Updated CircularDynamicList file.
 * Translated CircularDynamicList file.
 * Added freeList() function on CircularDynamicList project.
+* Fixed the errors.
 
 #### Version_1.0 ####
 
@@ -25,12 +26,11 @@ These are my projects in C language made for FUMEC University in Data Structures
 * Circular dynamic lists functions:
 ** ...
 
-## to_do_list {
+## to_do_list() {
 
 * Translate the functions and comments.
 * Improve the structure.
 * Add functions to REAME.md.
-* Discover why the error "*expected declaration or statement at end of input	CircularDynamicList.c	/CircularDynamicList/src*" appears.
 * Finalize to future researchs.
 
 ## }

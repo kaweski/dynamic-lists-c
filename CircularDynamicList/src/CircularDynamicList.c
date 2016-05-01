@@ -1,10 +1,10 @@
 /*
  ============================================================================
- Name        : LDC.c
+ Name        : CircularDynamicList.c
  Author      : Natasha Kaweski
- Version     : --
- Copyright   : --
- Description : --
+ Version     : 2.0
+ Copyright   :
+ Description : Hello World in C, Ansi-style
  ============================================================================
  */
 
@@ -59,7 +59,7 @@ void printList(DList* list) {
 	DList* aux = list;
 
 	// If the list is empty, it doesn't enter the loop
-	if(aux) {
+	if(aux)
 	do {
 		printf( "List: %c\n", aux->data );
 		aux = aux->next;
@@ -105,22 +105,23 @@ DList* searchChar(DList* list, char ch) {
 DList* freeList(DList* list) {
 	DList* aux = list;
 
-	aux = aux->next;
+	if ( !emptyList(list) ) {
 
-	do {
-		DList* aux2 = aux;
-		aux = aux->next;
-		free(aux2);
-	} while (aux->next != NULL);
+		while (aux->next != NULL) {
+			DList* aux2 = aux;
+			aux = aux->next;
+			free(aux2);
+		}
 
-	// Free the last pointer.
-	free(aux);
-
+		// Free the last pointer.
+		free(aux);
+	}
 	// Return the memory address list.
 	return list;
 }
 
-int main(void) {
+int main(void)
+{
 
 	DList *mainList;
 	mainList = startList(); // Starts the list with NULL value
@@ -134,9 +135,11 @@ int main(void) {
 
 	printList(mainList);
 
-	printf("%p", searchChar(mainList, 'A'));
+	printf("\n\nSearch result: %p\n\n", searchChar(mainList, 'A'));
 
-	freeList(mainList);
+	mainList = freeList(mainList);
+
+	printList(mainList);
 
 	return EXIT_SUCCESS;
 
