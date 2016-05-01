@@ -103,12 +103,12 @@ DList* searchChar(DList* list, char ch) {
  */
 DList* freeList(DList* list) {
 
-	if ( !emptyList(list) ) {
-		DList* aux = list;
-		list = list->next;
-		free(aux);
-		if ( !emptyList(list) )
-			return freeList(list);
+	DList* aux;
+
+	if ( !emptyList(list) && !emptyList(list->next) ) {
+		aux = list->next;
+		free(list);
+		return freeList(aux);
 	}
 	// Return the memory address list.
 	return list;
