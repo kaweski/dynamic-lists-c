@@ -2,102 +2,141 @@
  ============================================================================
  Name        : LDC.c
  Author      : Natasha Kaweski
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Version     : --
+ Copyright   : --
+ Description : --
  ============================================================================
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct lista TLista;
-struct lista {
-	char dado;
-	TLista* prox;
+typedef struct list DList;
+struct list {
+	char data;
+	DList* next;
 };
 
-TLista* inicializa() {
+/*
+ * Starts a list (because any pointer list can start without an value).
+ * NULL is a start value to receive other values, as char data values.
+ */
+DList* startList() {
 	return NULL;
 }
 
-TLista* insereCirc(TLista *lista, char ch) {
-	TLista *aux;
-	aux = (TLista*) malloc( sizeof(TLista) );
-	aux->dado = ch;
+/*
+ * Insert char data values to the list
+ * and makes it circular.
+ */
+DList* insertChar(DList* list, char ch) {
+	DList* aux;
+	aux = (DList*) malloc(sizeof(DList));
+	aux->data = ch;
 
-	if ( lista == NULL ) {
-		aux->prox = aux;
+	if ( list == NULL ) {
+		aux->next = aux;
 	} else {
-		aux->prox = lista;
+		aux->next = list;
+		DList* aux2 = list; // Find the last register
 
-		// Encontra o último registro
-		TLista * aux2 = lista;
-
+		// Make the list circular.
 		do {
-			aux2 = aux2->prox;
-		} while ( aux2->prox != lista );
+			aux2 = aux2->next;
+		} while ( aux2->next != list );
 
-		// Returna pro último registro da lista (topo)
-		aux2->prox = aux;
+		/* Return to the last register
+		 * at the top of the list. */
+		aux2->next = aux;
 	}
-
-	return aux;
+	return aux; // Top of the list
 }
 
-void imprimeCirc(TLista* lista) {
-	TLista *aux = lista;
+/*
+ * Print the values of a circular list.
+ */
+void printList(DList* list) {
+	DList* aux = list;
 
-	// Se a lista for vazia, não entra no loop
+	// If the list is empty, it doesn't enter the loop
+	if(aux) {
+	do {
+		printf( "List: %c\n", aux->data );
+		aux = aux->next;
+	} while ( aux != list ); // Exit the loop
+}
+
+/*
+ * Prints an infinite loop with all the data values inserted
+ */
+void infinitePrint(DList* list) {
+	while (list != NULL) { // Never enters here until the list is really empty
+		printf( "List: %c\n", list->data );
+		list = list->next;
+	}
+}
+
+/*
+ * Return if the list is empty.
+ */
+int emptyList(DList* list){
+	return !list;
+}
+
+/*
+ * Search the char param data, and if it finds
+ * return its memory address
+ */
+DList* searchChar(DList* list, char ch) {
+	DList* aux = list;
+
 	if(aux)
 	do {
-		printf("lista --> %c\n", aux->dado);
-		aux = aux->prox;
-	} while ( aux != lista );
+		if ( aux->data == ch ) return aux;
+		aux = aux->next;
+	} while ( aux != list );  // Exit the loop
+
+	return NULL; // If is doesn't find the char, it returns nothing
 }
 
-void imprime (TLista* lista) {
-	while (lista != NULL) {
-		printf( "lista--> %c\n", lista->dado );
-		lista = lista->prox;
-	}
-}
+/*
+ * Free space in memory and clean the list.
+ */
+DList* freeList(DList* list) {
+	DList* aux = list;
 
-int vaziaCirc(TLista* lista){
-	return !lista;
-}
+	aux = aux->next;
 
-TLista* buscaCirc(TLista* lista, char ch) {
-	TLista *aux = lista;
-
-	if(aux)
 	do {
-		if ( aux->dado == ch ) return aux;
-		aux = aux->prox;
-	} while ( aux != lista );
+		DList* aux2 = aux;
+		aux = aux->next;
+		free(aux2);
+	} while (aux->next != NULL);
 
-	return NULL;
+	// Free the last pointer.
+	free(aux);
+
+	// Return the memory address list.
+	return list;
 }
-
-TLista* liberaCirc(TLista* lista);
 
 int main(void) {
 
-	TLista *listac;
-	listac = inicializa();
+	DList *mainList;
+	mainList = startList(); // Starts the list with NULL value
 
-//	imprime(listac);
+	mainList = insertChar(mainList, 'C');
+	mainList = insertChar(mainList, 'H');
+	mainList = insertChar(mainList, 'E');
+	mainList = insertChar(mainList, 'R');
+	mainList = insertChar(mainList, 'R');
+	mainList = insertChar(mainList, 'Y');
 
-	listac = insereCirc(listac, 'F');
-	listac = insereCirc(listac, 'A');
-	listac = insereCirc(listac, 'C');
-	listac = insereCirc(listac, 'E');
+	printList(mainList);
 
-//	imprime(listac);
+	printf("%p", searchChar(mainList, 'A'));
 
-//	imprimeCirc(listac);
-
-	printf("%d", buscaCirc(listac, 'J'));
+	freeList(mainList);
 
 	return EXIT_SUCCESS;
 

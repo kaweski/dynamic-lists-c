@@ -1,20 +1,39 @@
-# :cherries: C Cherry Lists {
+# :cherries: c_herry_lists() {
 
 ## Description
 
-These are my projects in C language made for FUMEC University in Data Structures II.
+These are my projects in C language made for FUMEC University in Data Structures II, using Eclipse C/C++ IDE.
+
+### Versions ###
+
+#### Version_1.1 ####
+
+* Updated the README.md
+* Updated CircularDynamicList file.
+* Translated CircularDynamicList file.
+* Added freeList() function on CircularDynamicList project.
+
+#### Version_1.0 ####
+
+* Beginning!
 
 ## Content
 
 * Pointers (dynamic memory alocation).
-* Dynamic list functions.
-* Circular dynamic lists functions.
+* Dynamic list functions:
+** ...
+* Circular dynamic lists functions:
+** ...
 
-## To do list
+## to_do_list {
 
 * Translate the functions and comments.
 * Improve the structure.
+* Add functions to REAME.md.
+* Discover why the error "*expected declaration or statement at end of input	CircularDynamicList.c	/CircularDynamicList/src*" appears.
 * Finalize to future researchs.
+
+## }
 
 ## Why cherry?
 
