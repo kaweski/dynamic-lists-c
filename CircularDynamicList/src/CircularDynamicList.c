@@ -2,7 +2,7 @@
  ============================================================================
  Name        : CircularDynamicList.c
  Author      : Natasha Kaweski
- Version     : 1.2
+ Version     : 1.3
  ============================================================================
  */
 
@@ -105,7 +105,7 @@ DList* freeList(DList* list) {
 
 	DList* aux;
 
-	if ( !emptyList(list) && !emptyList(list->next) ) {
+	if ( !emptyList(list) ) {
 		aux = list->next;
 		free(list);
 		return freeList(aux);

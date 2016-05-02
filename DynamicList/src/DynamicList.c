@@ -2,117 +2,142 @@
  ============================================================================
  Name        : DynamicList.c
  Author      : Natasha Kaweski
- Version     : 2.0
- Copyright   : 
- Description : Hello World in C, Ansi-style
+ Version     : 1.0
  ============================================================================
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-// List struct
-typedef struct lista TLista;
-struct lista {
-	char dado;
-	TLista *prox;
+typedef struct list DList;
+struct list {
+	char data;
+	DList* next;
 };
 
-TLista* insere(TLista *lista, char ch);
-//                    250 ->E->C->A->F->NULL
-void imprime(TLista *lista);
-TLista* busca (TLista* lista, char ch);
-int pertence(TLista* lista, char ch);
-//int vazia(TLista*);
+int emptyList(DList* list);
 
-// Função que retorna um ponteiro da letra anterior
-TLista* insere(TLista *lista, char ch) {
+/*
+ * Insert a char and return the memory address
+ * of the before pointer of the list.
+ */
+DList* insertChar(DList* list, char ch) {
+	DList* aux;
+	aux = (DList*) malloc(sizeof(DList*));
+	aux->data = ch; // Insert the char value.
+	aux->next = list; // Put the memory address of the list at the auxiliar list pointer.
 
-	TLista *aux;
-	aux = (TLista *) malloc( sizeof(TLista) );
-	aux->dado = ch;
-	aux->prox = lista;
-
+	// Return the auxiliar pointer created.
 	return aux;
 }
 
-// Função que imprime os dados do ponteiro
-void imprime(TLista *lista) {
-	while ( lista != NULL ) {
-		printf("%c\n", lista->dado);
-		lista = lista->prox;
+/*
+ * Prints the data values of the list.
+ */
+void printList(DList* list) {
+	while ( emptyList(list) ) {
+		printf("List: %c\n", list->data);
+		list = list->next;
 	}
 }
 
-// Função que pesquisa o char dentor do ponteiro
-TLista* busca(TLista* lista, char ch) {
-	while ( lista != NULL ) {
-		if ( lista->dado == ch )
-			return lista; // Tem que retornar o endereço do registro
-
-		lista = lista->prox;
+/*
+ * Search a char inside a pointer list
+ */
+DList* search(DList* list, char ch) {
+	while ( emptyList(list) ) {
+		if ( list->data == ch )
+			return list; // Must return the register address memory.
+		list = list->next;
 	}
-	return lista; // Pode ser substituido por NULL
+	return list; // Can be placed by an "NULL"
 }
 
-// Função que retorna se o dado pertence ou não
-int pertence(TLista* lista, char ch) {
-	while ( lista != NULL ) {
-		if ( lista->dado == ch )
-			return 1;
-
-		lista = lista->prox;
+/*
+ * Returns if the data value belongs to the list or not.
+ */
+int belongs(DList* list, char ch) {
+	while ( emptyList(list) ) {
+		if ( list->data == ch ) // Check of the list has the char
+			return 1; // If belongs, return true.
+		list = list->next;
 	}
-	return 0;
-
-//	return ( pertence(lista->prox, ch) && NULL );
+	return 0; // If it's not, return false.
 }
 
-// Função que verifica se a lista está vazia
-int vazia(TLista* lista) {
+/*
+ * Return if the data value belongs to the list or not.
+ * This function is the same as before,
+ * but has just one line. :)
+ */
+int belongsRecursOneLine(DList* list, char ch) {
+	return ( belongs(list->next, ch) && NULL );
+}
 
-	if ( (lista != NULL) )
+/*
+ * Check if the list is empty or not,
+ * and return a "boolean" value.
+ */
+int emptyList(DList* list) {
+	if ( (list != NULL) )
 		return 0;
 	return 1;
-
 }
 
-// Função que remove o início da lista
-TLista* removeIni(TLista* lista) {
-	if ( !vazia(lista) ) {
-		TLista* aux = lista;
-		lista = lista->prox;
-		free(aux);
+/*
+ * Remove the data value of the pointer selected.
+ */
+DList* removeChar(DList* list) {
+	if ( !emptyList(list) ) {
+		DList* aux = list;
+		list = list->next;
+		free(aux); // Remove the value
 	}
-
-	return lista;
+	return list; // Return the next pointer of the list.
 }
 
-// Função que remove qualquer caractere
-TLista* removeQQ(TLista* lista, char ch) {
-	if ( !vazia(lista) ){
-		TLista* aux = lista;
-		TLista* aux2 = lista;
+/*
+ * Remove the pointer where the char selected is.
+ */
+DList* removeByChar(DList* list, char ch) {
+	if ( !emptyList(list) ){
+		DList* aux = list;
+		DList* aux2 = list;
 
-		if ( aux->dado == ch ) {
-			return removeIni(lista);
+		if ( aux->data == ch ) {
+			/*
+			 * If the char of the current pointer is the char selected,
+			 * it will be removed, calling the function that removes
+			 * memory allocation.
+			 */
+			return removeChar(list);
+
 		} else {
-			while ( aux->prox != NULL ) {
-				if ( aux->prox->dado == ch ) {
-					aux2 = aux->prox;
-					aux->prox = aux2->prox;
+			while ( aux->next != NULL ) {
+				// Check the next pointer data value.
+				if ( aux->next->data == ch ) {
+
+					// Auxiliar pointer list receive the next pointer of the list.
+					aux2 = aux->next;
+
+					// The actual pointer receive the next pointer of the next auxiliar pointer.
+					aux->next = aux2->next;
+
+					// Free the memory allocation of the data value selected.
 					free(aux2);
 				} else {
-					aux = aux->prox;
+					aux = aux->next;
 				}
 			}
 		}
 	}
-	return lista;
+
+	// Returns the new list.
+	return list;
 }
 
 // Função que libera a lista inteira
-TLista* libera(TLista* lista) {
+DList* libera(DList* list) {
 
 // FUNÇÃO NORMAL
 
@@ -167,10 +192,10 @@ TLista* libera(TLista* lista) {
 //	return lista;
 
 // 	Função melhorada
-	if ( !vazia(lista) ) {
-		return libera( removeIni(lista) );
+	if ( !vazia(list) ) {
+		return libera( removeChar(list) );
 	}
-	return lista;
+	return list;
 
 // 	Meu código
 
@@ -186,62 +211,62 @@ TLista* libera(TLista* lista) {
 
 // Função que coloca a lista em loop
 //                   lista -> E -> C -> A -> F -> NULL
-TLista* loop(TLista* lista) {
+DList* loop(DList* list) {
 
-	TLista* aux = lista;
+	DList* aux = list;
 
-	while ( aux->prox != NULL ) {
-		aux = aux->prox;
+	while ( aux->next != NULL ) {
+		aux = aux->next;
 	}
 
 	//aux ja esta no F
-	aux->prox = lista;
+	aux->next = list;
 
-	return lista;
+	return list;
 
 }
 
 // Função da prova que inverte os dois primeiros dados
-TLista* invertePrimeiroSegundo(TLista* lista) {
-	TLista* aux = lista;
-	TLista* aux2 = lista->prox;
+DList* invertePrimeiroSegundo(DList* list) {
+	DList* aux = list;
+	DList* aux2 = list->next;
 
 	// Inverte
-	aux->prox = aux2->prox;
-	aux2->prox = aux;
+	aux->next = aux2->next;
+	aux2->next = aux;
 
 	return aux2;
 }
 
 // Função da prova que mescla as duas listas
-TLista* mescla(TLista* lista1, TLista* lista2){
-	TLista* aux;
-	TLista* aux2;
+DList* mescla(DList* list1, DList* list2){
+	DList* aux;
+	DList* aux2;
 
 	// Verifica se existe vazia
-	if ( lista1 != NULL ) {
-		aux = lista1;
-		lista1 = lista1->prox;
+	if ( list1 != NULL ) {
+		aux = list1;
+		list1 = list1->next;
 		aux2 = aux;
-	} else if ( lista2 != NULL ) {
-		aux = lista2;
-		lista2 = lista2->prox;
+	} else if ( list2 != NULL ) {
+		aux = list2;
+		list2 = list2->next;
 		aux2 = aux;
 	} else
 		return NULL;
 
 	// Mescla
-	while(lista1 != NULL || lista2 != NULL) {
+	while(list1 != NULL || list2 != NULL) {
 
-		if ( lista2 != NULL ) {
-			aux2->prox = lista2;
-			lista2 = lista2->prox;
-			aux2 = aux2->prox;
+		if ( list2 != NULL ) {
+			aux2->next = list2;
+			list2 = list2->next;
+			aux2 = aux2->next;
 		}
-		if ( lista1 != NULL ) {
-			aux2->prox = lista1;
-			lista1 = lista1->prox;
-			aux2 = aux2->prox;
+		if ( list1 != NULL ) {
+			aux2->next = list1;
+			list1 = list1->next;
+			aux2 = aux2->next;
 		}
 	}
 
@@ -249,32 +274,32 @@ TLista* mescla(TLista* lista1, TLista* lista2){
 }
 
 int main(void) {
-	TLista* listax = NULL;
-	TLista* lista2 = NULL;
+	DList* listax = NULL;
+	DList* lista2 = NULL;
 
-	listax = insere(listax,'C');
-	listax = insere(listax,'E');
-	listax = insere(listax,'M');
-	listax = insere(listax,'U');
-	listax = insere(listax,'F');
+	listax = insertChar(listax,'C');
+	listax = insertChar(listax,'E');
+	listax = insertChar(listax,'M');
+	listax = insertChar(listax,'U');
+	listax = insertChar(listax,'F');
 
-	lista2 = insere(listax,'E');
-	lista2 = insere(listax,'C');
-	lista2 = insere(listax,'A');
-	lista2 = insere(listax,'F');
+	lista2 = insertChar(listax,'E');
+	lista2 = insertChar(listax,'C');
+	lista2 = insertChar(listax,'A');
+	lista2 = insertChar(listax,'F');
 
 //	imprime(listax);
 //	imprime(lista2);
 
 	printf("\n----------------------------\n");
 //	listax = mescla(listax, lista2);
-	imprime(listax);
-	imprime(lista2);
+	printList(listax);
+	printList(lista2);
 
 //	listax = invertePrimeiroSegundo(listax);
 //	imprime(listax);
 
-//	listax = removeIni(listax);
+//	listax = removeChar(listax);
 //	listax = removeQQ(listax, 'A');
 //	imprime(listax);
 
