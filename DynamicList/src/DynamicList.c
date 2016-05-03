@@ -18,17 +18,15 @@ struct list {
 int emptyList(DList* list);
 
 /*
- * Insert a char and return the memory address
- * of the before pointer of the list.
+ * Inserts a char and return the memory address
+ * of the previous pointer of the list.
  */
 DList* insertChar(DList* list, char ch) {
 	DList* aux;
 	aux = (DList*) malloc(sizeof(DList*));
-	aux->data = ch; // Insert the char value.
-	aux->next = list; // Put the memory address of the list at the auxiliar list pointer.
-
-	// Return the auxiliar pointer created.
-	return aux;
+	aux->data = ch; // Inserts the char value.
+	aux->next = list; // Puts the memory address of the list at the auxiliary list pointer.
+	return aux; // Returns the auxiliary pointer created.
 }
 
 /*
@@ -42,31 +40,31 @@ void printList(DList* list) {
 }
 
 /*
- * Search a char inside a pointer list
+ * Search a character within a list.
  */
 DList* search(DList* list, char ch) {
 	while ( emptyList(list) ) {
 		if ( list->data == ch )
-			return list; // Must return the register address memory.
+			return list; // Must return the address memory of a register.
 		list = list->next;
 	}
-	return list; // Can be placed by an "NULL"
+	return list; // Can be replaced by "NULL"
+}
+
+/*
+ * Returns if a data belongs to the list or not.
+ */
+int belongs(DList* list, char ch) {
+	while ( emptyList(list) ) {
+		if ( list->data == ch ) // Check if the list have the char
+			return 1; // If it belongs, returns true.
+		list = list->next;
+	}
+	return 0; // If not, return false.
 }
 
 /*
  * Returns if the data value belongs to the list or not.
- */
-int belongs(DList* list, char ch) {
-	while ( emptyList(list) ) {
-		if ( list->data == ch ) // Check of the list has the char
-			return 1; // If belongs, return true.
-		list = list->next;
-	}
-	return 0; // If it's not, return false.
-}
-
-/*
- * Return if the data value belongs to the list or not.
  * This function is the same as before,
  * but has just one line. :)
  */
@@ -75,7 +73,7 @@ int belongsRecursOneLine(DList* list, char ch) {
 }
 
 /*
- * Check if the list is empty or not,
+ * Checks if the list is empty or not,
  * and return a "boolean" value.
  */
 int emptyList(DList* list) {
@@ -85,19 +83,19 @@ int emptyList(DList* list) {
 }
 
 /*
- * Remove the data value of the pointer selected.
+ * Removes the data value of the pointer.
  */
 DList* removeChar(DList* list) {
 	if ( !emptyList(list) ) {
 		DList* aux = list;
 		list = list->next;
-		free(aux); // Remove the value
+		free(aux); // Removes the value
 	}
-	return list; // Return the next pointer of the list.
+	return list; // Returns the next pointer of the list.
 }
 
 /*
- * Remove the pointer where the char selected is.
+ * Removes the pointer where the chosen char is.
  */
 DList* removeByChar(DList* list, char ch) {
 	if ( !emptyList(list) ){
@@ -108,22 +106,19 @@ DList* removeByChar(DList* list, char ch) {
 			/*
 			 * If the char of the current pointer is the char selected,
 			 * it will be removed, calling the function that removes
-			 * memory allocation.
+			 * the data in memory.
 			 */
 			return removeChar(list);
 
 		} else {
 			while ( aux->next != NULL ) {
-				// Check the next pointer data value.
+				// Checks the data value of next pointer.
 				if ( aux->next->data == ch ) {
-
-					// Auxiliar pointer list receive the next pointer of the list.
+					// The auxiliary list receive the next pointer of the list.
 					aux2 = aux->next;
-
-					// The actual pointer receive the next pointer of the next auxiliar pointer.
+					// The current pointer gets the next pointer of the following auxiliary pointer.
 					aux->next = aux2->next;
-
-					// Free the memory allocation of the data value selected.
+					// Frees the data in memory of value selected.
 					free(aux2);
 				} else {
 					aux = aux->next;
@@ -136,165 +131,138 @@ DList* removeByChar(DList* list, char ch) {
 	return list;
 }
 
-// Função que libera a lista inteira
-DList* libera(DList* list) {
-
-// FUNÇÃO NORMAL
-
-// 	Meu código
-
-
-//	TLista* aux = lista;
-//	while ( aux != NULL ) {
-//		lista = aux->prox;
-//		free(aux);
-//		aux = lista->prox;
-//	}
-//	return aux;
-
-// ++++++++++++++++++++++++
-// ++++++++++++++++++++++++
-// ++++++++++++++++++++++++
-
-// Código do Xulambs
-
-//	TLista* aux;
-//	while ( !vazia(lista) ) {
-// 		aux = lista;
-//		lista = lista->prox;
-//		free(aux);
-//	}
-//	return lista;
-
-// ++++++++++++++++++++++++
-// ++++++++++++++++++++++++
-// ++++++++++++++++++++++++
-
-//	while(!vazia(lista)){
-//		lista = removeIni(lista);
-//	}
-//	return lista;
-
-// ++++++++++++++++++++++++
-// ++++++++++++++++++++++++
-// ++++++++++++++++++++++++
-
-// RECURSIVA
-
-//	Código do Xulambs
-//	if ( !vazia(lista) ) {
-//		TLista* aux = lista;
-//		lista = lista->prox;
-//		free(aux);
-//		return libera(lista);
-//	}
-//	// Caso base
-//	return lista;
-
-// 	Função melhorada
-	if ( !vazia(list) ) {
-		return libera( removeChar(list) );
+/*
+ * Removes the entire list.
+ */
+DList* freeList(DList* list) {
+	DList* aux;
+	while ( !emptyList(list) ) {
+		aux = list;
+		list = list->next; // Next pointer of the list.
+		free(aux); // Frees the last pointer.
 	}
-	return list;
-
-// 	Meu código
-
-//	TLista* aux = lista;
-//	if ( aux != NULL ) {
-//		lista = lista->prox;
-//		free(aux);
-//		return libera( lista );
-//	}
-//	return lista;
-
+	return list; // Returns the new pointer of the list.
 }
 
-// Função que coloca a lista em loop
-//                   lista -> E -> C -> A -> F -> NULL
+/*
+ * Removes the entire list,
+ * but this function has less lines of code.
+ */
+DList* freeListLessLine(DList* list) {
+	while(!emptyList(list)) // Checks if the list is empty.
+		list = removeChar(list); // Store the new pointer made by the function removeChar()
+	return list; // Returns this list when it exits the loop.
+}
+
+/*
+ * Removes the entire list,
+ * using recursive logic.
+ */
+DList* freeListRecursive(DList* list) {
+	if ( !emptyList(list) ) {
+		DList* aux = list;
+		list = list->next;
+		free(aux);
+
+		// Returns the same function until the list is empty.
+		return libera(list);
+	}
+	return list;
+}
+
+/*
+ * Removes the entire list,
+ * using recursive logic,
+ * with less lines of code.
+ */
+DList* freeListRecursiveLessLine(DList* list) {
+	if ( !emptyList(list) )
+		return libera( removeChar(list) );
+	return list;
+}
+
+/*
+ * Function turns the list in infinite loop.
+ */
 DList* loop(DList* list) {
-
 	DList* aux = list;
-
 	while ( aux->next != NULL ) {
 		aux = aux->next;
 	}
-
-	//aux ja esta no F
-	aux->next = list;
-
+	aux->next = list; // Turns back to list.
 	return list;
-
 }
 
-// Função da prova que inverte os dois primeiros dados
-DList* invertePrimeiroSegundo(DList* list) {
+/*
+ * Inverts the first two list data
+ */
+DList* inverteTwoData(DList* list) {
 	DList* aux = list;
 	DList* aux2 = list->next;
-
-	// Inverte
-	aux->next = aux2->next;
-	aux2->next = aux;
-
-	return aux2;
+	aux->next = aux2->next; // Gets the third list data
+	aux2->next = aux; // Turns back to list.
+	return aux2; // Returns a new list with the first data.
 }
 
-// Função da prova que mescla as duas listas
+/*
+ * Mixes two lists.
+ */
 DList* mescla(DList* list1, DList* list2){
 	DList* aux;
 	DList* aux2;
 
-	// Verifica se existe vazia
-	if ( list1 != NULL ) {
+	// Check if exists an empty list.
+	if ( !emptyList(list1) ) {
 		aux = list1;
 		list1 = list1->next;
 		aux2 = aux;
-	} else if ( list2 != NULL ) {
+
+	} else if ( !emptyList(list2) ) {
 		aux = list2;
 		list2 = list2->next;
 		aux2 = aux;
-	} else
+
+	} else {
 		return NULL;
+	}
 
-	// Mescla
-	while(list1 != NULL || list2 != NULL) {
+	// Then mix the lists
+	while( emptyList(list1) || emptyList(list2) ) {
 
-		if ( list2 != NULL ) {
+		if ( emptyList(list2) ) {
 			aux2->next = list2;
 			list2 = list2->next;
 			aux2 = aux2->next;
 		}
-		if ( list1 != NULL ) {
+
+		if ( emptyList(list1) ) {
 			aux2->next = list1;
 			list1 = list1->next;
 			aux2 = aux2->next;
 		}
 	}
-
-	// Escolhe o primeiro registro
 }
 
 int main(void) {
-	DList* listax = NULL;
-	DList* lista2 = NULL;
 
-	listax = insertChar(listax,'C');
-	listax = insertChar(listax,'E');
-	listax = insertChar(listax,'M');
-	listax = insertChar(listax,'U');
-	listax = insertChar(listax,'F');
+	DList* list1 = NULL;
+	DList* list2 = NULL;
+	DList* listMix = NULL;
 
-	lista2 = insertChar(listax,'E');
-	lista2 = insertChar(listax,'C');
-	lista2 = insertChar(listax,'A');
-	lista2 = insertChar(listax,'F');
+	list1 = insertChar(list1,'C');
+	list1 = insertChar(list1,'H');
+	list1 = insertChar(list1,'E');
+	list1 = insertChar(list1,'R');
+	list1 = insertChar(list1,'R');
+	list1 = insertChar(list1,'Y');
 
-//	imprime(listax);
-//	imprime(lista2);
+	list2 = insertChar(list2,'E');
+	list2 = insertChar(list2,'C');
+	list2 = insertChar(list2,'A');
+	list2 = insertChar(list2,'F');
 
-	printf("\n----------------------------\n");
-//	listax = mescla(listax, lista2);
-	printList(listax);
-	printList(lista2);
+	listMix = mescla(list1, list2);
+	printList(listMix);
 
 //	listax = invertePrimeiroSegundo(listax);
 //	imprime(listax);

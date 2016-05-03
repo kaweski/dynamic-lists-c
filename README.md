@@ -9,6 +9,7 @@ These are my projects in C language made for FUMEC University in Data Structures
 #### Version 1.3 ####
 
 * Update README with all circular dynamics lists functions.
+* Translated the functions and comments.
 
 #### Version 1.2 ####
 
@@ -46,7 +47,6 @@ These are my projects in C language made for FUMEC University in Data Structures
 
 ### to_do_list() {
 
-* Translate the functions and comments.
 * Improve the structure.
 * Add dynamic lists functions to REAME.md.
 * Finalize to future researchs.
