@@ -196,7 +196,7 @@ DList* loop(DList* list) {
 /*
  * Inverts the first two list data
  */
-DList* inverteTwoData(DList* list) {
+DList* invertTwoData(DList* list) {
 	DList* aux = list;
 	DList* aux2 = list->next;
 	aux->next = aux2->next; // Gets the third list data
@@ -207,7 +207,7 @@ DList* inverteTwoData(DList* list) {
 /*
  * Mixes two lists.
  */
-DList* mescla(DList* list1, DList* list2){
+DList* mixLists(DList* list1, DList* list2){
 	DList* aux;
 	DList* aux2;
 
@@ -241,6 +241,8 @@ DList* mescla(DList* list1, DList* list2){
 			aux2 = aux2->next;
 		}
 	}
+
+	return NULL;
 }
 
 int main(void) {
@@ -261,27 +263,8 @@ int main(void) {
 	list2 = insertChar(list2,'A');
 	list2 = insertChar(list2,'F');
 
-	listMix = mescla(list1, list2);
+	listMix = mixLists(list1, list2);
 	printList(listMix);
-
-//	listax = invertePrimeiroSegundo(listax);
-//	imprime(listax);
-
-//	listax = removeChar(listax);
-//	listax = removeQQ(listax, 'A');
-//	imprime(listax);
-
-//	listax = libera(listax);
-//	imprime(listax);
-//	listax = loop(listax);
-
-//	imprime(listax);
-
-	printf("\n----------------------------\n");
-
-//	printf("Busca: %p\n\n", (busca(listax, 'F')));
-//	printf("Pertence: %d\n\n", (pertence(listax, 'F')));
-//	printf("Vazia: %d\n\n", (vazia(listax)));
 
 	return EXIT_SUCCESS;
 }
