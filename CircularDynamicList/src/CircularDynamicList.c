@@ -103,20 +103,42 @@ DList* searchChar(DList* list, char ch) {
  */
 DList* freeList(DList* list) {
 
-	DList* aux;
-
 	if ( !emptyList(list) ) {
-		aux = list->next;
-		free(list);
-		return freeList(aux);
+
+		DList* aux = list->next; // Next value
+		DList* aux2 = aux;
+
+		while ( aux != list ) { // Checks if auxiliary variable is equal to list
+			aux2 = aux;
+			aux = aux->next;
+			free(aux2);
+			list->next = aux;
+		}
+
+		free(aux);
 	}
-	// Return the memory address list.
 	return list;
+}
+
+/*
+ * Remove any pointer.
+ */
+DList* freeListChar(DList* list, char ch) {
+	DList* aux = list;
+	DList* aux2 = list->next;
+
+	if ( aux2->data == ch ) {
+		aux->next = aux2->next;
+		free(aux2);
+		aux2 = aux->next;
+		return list;
+	}
+	return NULL;
 }
 
 int main(void) {
 
-	DList *mainList;
+	DList* mainList;
 	mainList = startList(); // Starts the list with NULL value
 
 	mainList = insertChar(mainList, 'C');
@@ -126,10 +148,11 @@ int main(void) {
 	//mainList = insertChar(mainList, 'R');
 	//mainList = insertChar(mainList, 'Y');
 
-	//printList(mainList);
-	// printf("\n\nSearch result: %p\n\n", searchChar(mainList, 'A'));
-
-	mainList = freeList(mainList);
+	if ( freeListChar(mainList, 'E') ) {
+		printf("Found");
+	} else {
+		printf("Not found");
+	}
 	printList(mainList);
 
 	return EXIT_SUCCESS;

@@ -6,11 +6,16 @@ These are my projects in C language made for FUMEC University in Data Structures
 
 ### Versions ###
 
+#### Version 1.4 ####
+
+* Updated freeList() function, now it works perfectly! :)
+* Added freeListChar() function.
+
 #### Version 1.3 ####
 
 * Updated README with all circular dynamics lists functions.
 * Translated functions and comments.
-* Update freeList(), now it is recursive function! But still doesn't work! (2).
+* Updated freeList(), now it is recursive function! But still doesn't work! (2).
 * Added dynamic lists functions to REAME.md.
 
 #### Version 1.2 ####
@@ -61,6 +66,7 @@ These are my projects in C language made for FUMEC University in Data Structures
 	- emptyList()
 	- searchChar()
 	- freeList()
+	- freeListChar()
 	- main()
 
 ### to_do_list() {
