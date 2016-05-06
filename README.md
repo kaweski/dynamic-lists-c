@@ -21,7 +21,7 @@ These are my projects in C language made for FUMEC University in Data Structures
 * Updated README with all circular dynamics lists functions.
 * Translated functions and comments.
 * Updated freeList(), now it is recursive function! But still doesn't work! (2).
-* Added dynamic lists functions to REAME.md.
+* Added dynamic lists functions to REAME.md.i
 
 #### Version 1.2 ####
 
@@ -39,7 +39,7 @@ These are my projects in C language made for FUMEC University in Data Structures
 
 * Beginning!
 
-## Content ###
+## Content ##
 	
 * Pointers (dynamic memory alocation) projects.
 * Dynamic lists.
@@ -47,49 +47,49 @@ These are my projects in C language made for FUMEC University in Data Structures
 * Doubly dynamic lists.
 * Doubly circular dynamic lists.
 
-## Dynamic list functions: ##
+### Dynamic list functions: ###
 
-	- emptyList()
-	- insertChar()
-	- printList()
-	- search()
-	- belongs()
-	- belongsRecursOneLine()
-	- emptyList()
-	- removeChar()
-	- removeByChar()
-	- freeList()
-	- freeListLessLine()
-	- freeListRecursive()
-	- freeListRecursiveLessLine()
-	- loop()
-	- invertTwoData()
-	- mixLists()
-	- main()
+* emptyList()
+* insertChar()
+* printList()
+* search()
+* belongs()
+* belongsRecursOneLine()
+* emptyList()
+* removeChar()
+* removeByChar()
+* freeList()
+* freeListLessLine()
+* freeListRecursive()
+* freeListRecursiveLessLine()
+* loop()
+* invertTwoData()
+* mixLists()
+* main()
 
-## Circular dynamic lists functions: ##
+### Circular dynamic lists functions: ###
 
-	- startList()
-	- insertChar()
-	- printList()
-	- infinitePrint()
-	- emptyList()
-	- searchChar()
-	- freeList()
-	- freeListChar()
-	- main()
+* startList()
+* insertChar()
+* printList()
+* infinitePrint()
+* emptyList()
+* searchChar()
+* freeList()
+* freeListChar()
+* main()
 
-## Doubly circular dynamic lists functions: ##
+### Doubly circular dynamic lists functions: ###
 
-	- startList()
-	- insertList()
-	- printList()
-	- emptyList()
-	- searchList()
-	- freeList() // Not ready!
-	- removeChar() // Not ready!
+* startList()
+* insertList()
+* printList()
+* emptyList()
+* searchList()
+* freeList() // Not ready!
+* removeChar() // Not ready!
 
-### to_do_list() { ###
+## to_do_list() { ##
 
 * Improve the structure in main().
 * Finalize function mixLists() in Dynamic Lists file.
@@ -97,8 +97,8 @@ These are my projects in C language made for FUMEC University in Data Structures
 
 ### } ###
 
-### Why cherry? ###
+## Why cherry? ##
 
-Because all these studies are my cherries on the cake with chantilly!
+:cherries: Because all these studies are my cherries on the cake with chantilly!
 
 # }
