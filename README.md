@@ -6,6 +6,11 @@ These are my projects in C language made for FUMEC University in Data Structures
 
 ### Versions ###
 
+#### Version 1.5 ####
+
+* Updated freeListChar(). It's done!
+* Added DoubleDynamicList and DoubleCircularDynamicList projects.
+
 #### Version 1.4 ####
 
 * Updated freeList() function, now it works perfectly! :)
@@ -34,10 +39,15 @@ These are my projects in C language made for FUMEC University in Data Structures
 
 * Beginning!
 
-## Content
+## Content ###
 	
-* Pointers (dynamic memory alocation).
-* Dynamic list functions:
+* Pointers (dynamic memory alocation) projects.
+* Dynamic lists.
+* Circular dynamic lists.
+* Doubly dynamic lists.
+* Doubly circular dynamic lists.
+
+## Dynamic list functions: ##
 
 	- emptyList()
 	- insertChar()
@@ -57,7 +67,7 @@ These are my projects in C language made for FUMEC University in Data Structures
 	- mixLists()
 	- main()
 
-* Circular dynamic lists functions:
+## Circular dynamic lists functions: ##
 
 	- startList()
 	- insertChar()
@@ -69,14 +79,25 @@ These are my projects in C language made for FUMEC University in Data Structures
 	- freeListChar()
 	- main()
 
-### to_do_list() {
+## Doubly circular dynamic lists functions: ##
+
+	- startList()
+	- insertList()
+	- printList()
+	- emptyList()
+	- searchList()
+	- freeList() // Not ready!
+	- removeChar() // Not ready!
+
+### to_do_list() { ###
 
 * Improve the structure in main().
 * Finalize function mixLists() in Dynamic Lists file.
+* Creates freeList() and removeChar() functions on DoublyDynamicList file.
 
-### }
+### } ###
 
-### Why cherry?
+### Why cherry? ###
 
 Because all these studies are my cherries on the cake with chantilly!
 

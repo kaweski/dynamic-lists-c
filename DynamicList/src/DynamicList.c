@@ -2,7 +2,6 @@
  ============================================================================
  Name        : DynamicList.c
  Author      : Natasha Kaweski
- Version     : 1.0
  ============================================================================
  */
 
@@ -23,7 +22,7 @@ int emptyList(DList* list);
  */
 DList* insertChar(DList* list, char ch) {
 	DList* aux;
-	aux = (DList*) malloc(sizeof(DList*));
+	aux = (DList*) malloc(sizeof(DList));
 	aux->data = ch; // Inserts the char value.
 	aux->next = list; // Puts the memory address of the list at the auxiliary list pointer.
 	return aux; // Returns the auxiliary pointer created.

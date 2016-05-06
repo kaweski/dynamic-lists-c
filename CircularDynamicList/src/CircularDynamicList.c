@@ -2,7 +2,6 @@
  ============================================================================
  Name        : CircularDynamicList.c
  Author      : Natasha Kaweski
- Version     : 1.3
  ============================================================================
  */
 
@@ -124,16 +123,47 @@ DList* freeList(DList* list) {
  * Remove any pointer.
  */
 DList* freeListChar(DList* list, char ch) {
-	DList* aux = list;
-	DList* aux2 = list->next;
 
-	if ( aux2->data == ch ) {
-		aux->next = aux2->next;
-		free(aux2);
-		aux2 = aux->next;
+	if ( emptyList(list) )
 		return list;
+
+	DList* aux = list;
+	DList* aux2;
+
+	/* If his next value is the same address as list, it has just one register
+	 * and if the char is the same as the char inside the list, it's the
+	 * value we need to free from memory.
+	 * */
+	if ( aux->data == ch && aux->next == list ) {
+		list = startList();
+		free(aux);
+
+	} else if ( aux->data == ch && aux->next != list ) { // Check if it is the first element of the list.
+		aux2 = list;
+		do {
+			aux2 = aux2->next;
+		} while ( aux2->next != list ); // Finds the last register of the list.
+
+		list = list->next; // Changes the list address
+
+	// Removing any other char
+	} else {
+
+		do {
+			// Checks the data value of next pointer.
+			if ( aux->next->data == ch ) {
+				// The auxiliary list receive the next pointer of the list.
+				aux2 = aux->next;
+				// The current pointer gets the next pointer of the following auxiliary pointer.
+				aux->next = aux2->next; // Or use aux->prox->prox
+				// Frees the data in memory of value selected.
+				free(aux2);
+			} else {
+				aux = aux->next;
+			}
+		} while ( aux->next != list );
 	}
-	return NULL;
+	return list;
 }
 
 int main(void) {
@@ -142,17 +172,17 @@ int main(void) {
 	mainList = startList(); // Starts the list with NULL value
 
 	mainList = insertChar(mainList, 'C');
-	mainList = insertChar(mainList, 'H');
-	mainList = insertChar(mainList, 'E');
+	//mainList = insertChar(mainList, 'H');
+	//mainList = insertChar(mainList, 'E');
 	//mainList = insertChar(mainList, 'R');
 	//mainList = insertChar(mainList, 'R');
 	//mainList = insertChar(mainList, 'Y');
 
-	if ( freeListChar(mainList, 'E') ) {
-		printf("Found");
-	} else {
-		printf("Not found");
-	}
+	printList(mainList);
+
+	mainList = freeListChar(mainList, 'C');
+
+	printf("Remove: \n");
 	printList(mainList);
 
 	return EXIT_SUCCESS;
