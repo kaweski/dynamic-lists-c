@@ -6,9 +6,13 @@ These are my projects in C language made for FUMEC University in Data Structures
 
 ### Versions ###
 
+#### Version 1.6 ####
+
+* Added two functions to DoubleDynamicList: freeList() and removeChar().
+
 #### Version 1.5 ####
 
-* Updated freeListChar(). It's done!
+* Updated freeListChar(). It's done! :D
 * Added DoubleDynamicList and DoubleCircularDynamicList projects.
 
 #### Version 1.4 ####
@@ -21,7 +25,7 @@ These are my projects in C language made for FUMEC University in Data Structures
 * Updated README with all circular dynamics lists functions.
 * Translated functions and comments.
 * Updated freeList(), now it is recursive function! But still doesn't work! (2).
-* Added dynamic lists functions to REAME.md.i
+* Added dynamic lists functions to REAME.md.
 
 #### Version 1.2 ####
 
@@ -65,7 +69,6 @@ These are my projects in C language made for FUMEC University in Data Structures
 * loop()
 * invertTwoData()
 * mixLists()
-* main()
 
 ### Circular dynamic lists functions: ###
 
@@ -77,7 +80,6 @@ These are my projects in C language made for FUMEC University in Data Structures
 * searchChar()
 * freeList()
 * freeListChar()
-* main()
 
 ### Doubly circular dynamic lists functions: ###
 
@@ -86,16 +88,13 @@ These are my projects in C language made for FUMEC University in Data Structures
 * printList()
 * emptyList()
 * searchList()
-* freeList() // Not ready!
-* removeChar() // Not ready!
+* freeList()
+* removeChar()
 
-## to_do_list() { ##
+## Todo ##
 
 * Improve the structure in main().
 * Finalize function mixLists() in Dynamic Lists file.
-* Creates freeList() and removeChar() functions on DoublyDynamicList file.
-
-### } ###
 
 ## Why cherry? ##
 
