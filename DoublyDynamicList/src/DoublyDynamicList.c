@@ -69,22 +69,77 @@ DList* searchList(DList* list, char ch) {
 	return list; // Can be replaced by "NULL"
 }
 
-// DList* freeList(DList* list)
-// DList* removeChar(DList* list, char ch);
+/*
+ * Remove the entire list.
+ */
+DList* freeList(DList* list) {
+	DList* aux;
+
+	while ( list != NULL ) {
+		aux = list;
+		list = list->next;
+		free(aux);
+	}
+	return list;
+}
+
+/*
+ * Removes a char of the list.
+ */
+DList* removeChar(DList* list, char ch) {
+
+	if ( !emptyList(list) ) {
+
+		DList* aux = searchList(list, ch);
+		if ( !emptyList(aux) ) {
+
+			// If the list has just one insertion, it enters in this condition
+			if ( aux->prev == NULL && aux->next == NULL ) {
+				list = list->next;
+
+			// Checks if the first register pointers to NULL
+			} else if ( aux->prev == NULL ) {
+				list = list->next;
+				list->prev = startList();
+
+			// Checks if the last register pointers to NULL
+			} else if ( aux->next == NULL ) {
+				aux->prev->next = startList();
+
+			} else {
+				aux->prev->next = aux->next; // Links the right one
+				aux->next->prev = aux->prev; // Links the left one
+			}
+
+			free(aux);
+		}
+	}
+	return list;
+}
 
 int main(void) {
 
 	DList* mainList;
 	mainList = startList();
 
-	mainList = insertList(mainList, 'F');
-	mainList = insertList(mainList, 'A');
-	mainList = insertList(mainList, 'C');
-	mainList = insertList(mainList, 'E');
+	//mainList = insertList(mainList, 'L');
+	//mainList = insertList(mainList, 'I');
+	//mainList = insertList(mainList, 'S');
+	mainList = insertList(mainList, 'T');
 
 	printList(mainList);
 
-	printf("%c\n", mainList->next->next->next->prev->prev->prev->data);
+	// Tests if the entire list is correct (only if the list has more than tree inserts.
+	//printf("%c\n", mainList->next->next->next->prev->prev->prev->data);
+
+	printf("\n--------------------------------------\n");
+
+	//mainList = removeChar(mainList, 'T');
+
+	mainList = freeList(mainList);
+
+	printf("List: \n ");
+	printList(mainList);
 
 	return 0;
 }

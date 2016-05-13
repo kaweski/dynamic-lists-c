@@ -164,7 +164,7 @@ DList* freeListRecursive(DList* list) {
 		free(aux);
 
 		// Returns the same function until the list is empty.
-		return libera(list);
+		return freeListRecursive(list);
 	}
 	return list;
 }
@@ -176,7 +176,7 @@ DList* freeListRecursive(DList* list) {
  */
 DList* freeListRecursiveLessLine(DList* list) {
 	if ( !emptyList(list) )
-		return libera( removeChar(list) );
+		return freeListRecursiveLessLine( removeChar(list) );
 	return list;
 }
 
