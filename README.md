@@ -93,6 +93,7 @@ These are my projects in C language made for FUMEC University in Data Structures
 
 ## Todo ##
 
+* Improve the structure of removeChar() of DoublyDynamicList file.
 * Improve the structure in main().
 * Finalize function mixLists() in Dynamic Lists file.
 

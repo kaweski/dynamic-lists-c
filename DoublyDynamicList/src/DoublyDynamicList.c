@@ -90,34 +90,28 @@ DList* removeChar(DList* list, char ch) {
 
 	if ( !emptyList(list) ) {
 
-		DList* aux;
-		list = searchList(list, ch);
+		DList* aux = searchList(list, ch);
+		if ( !emptyList(aux) ) {
 
-		if ( !emptyList(list) ) {
-			aux = list;
-
-			// If the list has just one insertion, it enters this condition
+			// If the list has just one insertion, it enters in this condition
 			if ( aux->prev == NULL && aux->next == NULL ) {
-				free(aux);
-				return NULL;
-			}
+				list = list->next;
 
-			// Checks the previous pointer if it pointers to NULL
-			if ( aux->prev == NULL ) {
-				list = aux->next;
-				list->prev = NULL;
-				free(aux);
+			// Checks if the first register pointers to NULL
+			} else if ( aux->prev == NULL ) {
+				list = list->next;
+				list->prev = startList();
 
-			} else if ( aux->next == NULL ) { // Checks the next pointer if it pointers to NULL
-				list = aux->prev;
-				list->next = NULL;
-				free(aux);
+			// Checks if the last register pointers to NULL
+			} else if ( aux->next == NULL ) {
+				aux->prev->next = startList();
 
 			} else {
-				aux->prev->next = aux->next;
-				aux->next->prev = aux->prev;
-				free(aux);
+				aux->prev->next = aux->next; // Links the right one
+				aux->next->prev = aux->prev; // Links the left one
 			}
+
+			free(aux);
 		}
 	}
 	return list;
@@ -128,9 +122,9 @@ int main(void) {
 	DList* mainList;
 	mainList = startList();
 
-//	mainList = insertList(mainList, 'L');
-//	mainList = insertList(mainList, 'I');
-//	mainList = insertList(mainList, 'S');
+	//mainList = insertList(mainList, 'L');
+	//mainList = insertList(mainList, 'I');
+	//mainList = insertList(mainList, 'S');
 	mainList = insertList(mainList, 'T');
 
 	printList(mainList);
@@ -140,7 +134,9 @@ int main(void) {
 
 	printf("\n--------------------------------------\n");
 
-	mainList = removeChar(mainList, 'T');
+	//mainList = removeChar(mainList, 'T');
+
+	mainList = freeList(mainList);
 
 	printf("List: \n ");
 	printList(mainList);
