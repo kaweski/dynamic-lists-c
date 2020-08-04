@@ -1,4 +1,4 @@
-# :cherries: c_herry_lists() {
+# Dynamic Lists using C
 
 ## Description
 
@@ -96,9 +96,3 @@ These are my projects in C language made for FUMEC University in Data Structures
 * Improve the structure of removeChar() of DoublyDynamicList file.
 * Improve the structure in main().
 * Finalize function mixLists() in Dynamic Lists file.
-
-## Why cherry? ##
-
-:cherries: Because all these studies are my cherries on the cake with chantilly!
-
-# }
